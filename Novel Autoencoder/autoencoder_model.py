@@ -157,7 +157,6 @@ model.fit(
     epochs=500,
     batch_size=128,
     shuffle=True,
-    validation_data=(tensor_test_data, tensor_test_data),
 )
 
 encoded_predictions = model.encoder(tensor_test_data).numpy()
@@ -193,7 +192,6 @@ day_to_night_model.fit(
     epochs=500,
     batch_size=128,
     shuffle=True,
-    validation_data=(test_autoencoders[:20, :, :, :], test_autoencoders[20:, :, :, :]),
 )
 
 night_to_day_model.fit(
@@ -202,7 +200,6 @@ night_to_day_model.fit(
     epochs=500,
     batch_size=128,
     shuffle=True,
-    validation_data=(test_autoencoders[20:, :, :, :], test_autoencoders[:20, :, :, :]),
 )
 
 """Converting day encodings and night encodings into each other from the trained models."""
@@ -250,3 +247,8 @@ generate_images(tensor_test_data[28, :, :, :].numpy(), tensor_test_data[8, :, :,
 generate_images(tensor_test_data[4, :, :, :].numpy(), tensor_test_data[24, :, :, :].numpy(), test_night_decode_prediction[4, :, :, :].numpy())
 generate_images(tensor_test_data[17, :, :, :].numpy(), tensor_test_data[37, :, :, :].numpy(), test_night_decode_prediction[17, :, :, :].numpy())
 generate_images(tensor_test_data[9, :, :, :].numpy(), tensor_test_data[29, :, :, :].numpy(), test_night_decode_prediction[9, :, :, :].numpy())
+
+mae = tf.keras.losses.MeanAbsoluteError()
+
+print('Day to Night mean absolute error:', mae(tensor_test_data[20:, :, :, :], test_night_decode_prediction).numpy())
+print('Night to Day mean absolute error:', mae(tensor_test_data[:20, :, :, :], test_day_decode_prediction).numpy())
