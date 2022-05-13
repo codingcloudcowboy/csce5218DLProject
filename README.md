@@ -1,8 +1,15 @@
 # Day to Night GAN Converter
-* Ethan Cramer (EthanCramer2@my.unt.edu)
-* Bobby Meyer (bobbybujan-meyer@my.unt.edu)
-* Wesley DeLoach (WesleyDeLoach@my.unt.edu)
-* Richard Tran (RichardTran2@my.unt.edu)
+### *Day2Night*
+<div float="left">
+<img src="/assets/fig_5-8.png" width="50%" height="50%">
+</div>
+
+#### Ethan Cramer (EthanCramer2@my.unt.edu)
+#### Bobby Meyer (bobbybujan-meyer@my.unt.edu)
+#### Wesley DeLoach (WesleyDeLoach@my.unt.edu)
+#### Richard Tran (RichardTran2@my.unt.edu)
+
+<br>
 
 ## INTRODUCTION
 The issue of transposing an image from night to day or day to night is a common issue. The introduction of general adversarial networks (GANs) has made the application of changing seasons or changing any other attributes about an image possible. A GAN is a type of machine learning that was designed by Ian Goodfellow in 2014 where two neural networks compete against each other. [^5] GANs are used in cybersecurity for understanding deepfakes, in healthcare you can understand tumor detection and anomalies in a patient scan, or in editing photographs you can sharpen the image. We used a GAN to approach our problem of day to night, night to day, and changing attributes in an image. 
