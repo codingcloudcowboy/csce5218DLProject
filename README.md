@@ -29,14 +29,21 @@ Evaluating the performance of a GAN is an open and difficult problem. Many studi
 The pix2pix framework of Isola et al. uses a conditional GAN to map input images to output images by training on a labeled dataset. It also learns the loss function to train the mapping, making the model highly generalizable to a variety of image-to-image translation problems. 
 If we express the generator, G, as a mapping from the random noise vector z and the input image x to generated image y, and the discriminator, D, as a function of the input image x and the generated image y then we can describe the objective function of a conditional GAN as:
 
-
+<div align="center">
+<img src="/assets/formula_1.jpg" width="50%" height="50%">
+</div>
 
 This model also considers the L1 distance (instead of L2, which causes more blurring), which can be described as:
 
+<div align="center">
+<img src="/assets/formula_2.jpg" width="50%" height="50%">
+</div>
 
 Which gives us a final objective function:
 
-
+<div align="center">
+<img src="/assets/formula_3.jpg" width="50%" height="50%">
+</div>
 
 The random noise vector z ensures that the results are not purely deterministic. 
 
@@ -48,7 +55,9 @@ The optimization technique alternates gradient descent for the discriminator and
 
 The pix2pix model has a drawback in that it requires paired images, which can be hard to come by. Therefore, we want to compare it with an unsupervised model, cycleGAN, which can learn to translate images without paired input-output examples. The concept employed for this task is known as ‘cycle consistency’ which requires that if we translate an input image into an output image, then that output image should translate back to the original input image. The cycle consistency loss can be described as:
 
-
+<div align="center">
+<img src="/assets/formula_4.jpg" width="50%" height="50%">
+</div>
 
 ### *Novel Autoencoder Model*
 
@@ -61,26 +70,37 @@ Preprocessing into the autoencoder involves compressing the image down to a 64 b
 ## RESULTS
 
 ### *Day2Night with pix2pix and cycleGAN*
-
-
+<br>
+<div align="center">
+<img src="/assets/fig_1-4.png" width="50%" height="50%">
+<img src="/assets/fig_5-8.png" width="50%" height="50%">
+<img src="/assets/fig_9.png" width="50%" height="50%">
+</div>
+<br>
 In the day-time image to night-time image translation task, the pix2pix model was allowed to train for 40,000 steps (roughly 6 hours on a 8GB Radeon RX 580 GPU) with a lambda L1 loss coefficient of 100. The cycleGAN trained for 6 hours as well, which equated to 4,000 epochs with a lambda of 10. 
 
 ### *Night2Day with pix2pix and cycleGAN*
-
-
-
+<br>
+<div align="center">
+<img src="/assets/fig_10-12.png" width="50%" height="50%">
+</div>
+<br>
 For the night-time image to day-time image translation task, the cycleGAN did not need to be retrained due to its twin-generator and twin-discriminator architecture and cycle-consistency constraint. The pix2pix model was retrained for a much more limited 4,000 steps due to lack of training time. This is why the pix2pix performed much more poorly in the night-to-day task.
 
 ### *Novel Autoencoder Day2Night*
-
-
-
+<br>
+<div align="center">
+<img src="/assets/fig_13-15.png" width="50%" height="50%">
+</div>
+<br>
 The mean absolute training loss for the autoencoder ended at 0.1282, where the outputs range from 0 to 1.  On top of that the feed forward network for day to night encodings had a mean squared training loss of 0.3844. The ending mean absolute error for the day to night model on the test set was 0.3578.  
 
 ### *Novel Autoencoder Night2Day*
-
-
-
+<br>
+<div align="center">
+<img src="/assets/fig_16-18.png" width="50%" height="50%">
+</div>
+<br>
 The feed forward network for night to day encodings had a mean squared training loss of 0.3398. The mean absolute test error for this model was 0.3660.
 
 ## DISCUSSION 
